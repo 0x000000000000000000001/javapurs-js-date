@@ -2,18 +2,120 @@ public class Data_Ord {
     public static final Object FFI_STUB = new java.util.function.Function<Object, Object>() {
         public Object apply(Object arg) { return this; }
     };
-    public static Object ordArrayImpl = FFI_STUB;
-    public static Object ordArrayImpl(Object... args) { return null; }
-    public static Object ordBooleanImpl = FFI_STUB;
-    public static Object ordBooleanImpl(Object... args) { return null; }
-    public static Object ordCharImpl = FFI_STUB;
-    public static Object ordCharImpl(Object... args) { return null; }
-    public static Object ordIntImpl = FFI_STUB;
-    public static Object ordIntImpl(Object... args) { return null; }
-    public static Object ordNumberImpl = FFI_STUB;
-    public static Object ordNumberImpl(Object... args) { return null; }
-    public static Object ordStringImpl = FFI_STUB;
-    public static Object ordStringImpl(Object... args) { return null; }
+    // FFI provided by .spago/p/prelude-6.0.2/src/Data/Ord.java
+    public static final java.util.function.Function<Object, Object> ordIntImpl = (ltObj) -> {
+        return (java.util.function.Function<Object, Object>) (eqObj) -> {
+            return (java.util.function.Function<Object, Object>) (gtObj) -> {
+                return (java.util.function.Function<Object, Object>) (xObj) -> {
+                    return (java.util.function.Function<Object, Object>) (yObj) -> {
+                        Integer x = (Integer) xObj;
+                        Integer y = (Integer) yObj;
+                        if (x < y) return ltObj;
+                        if (x.equals(y)) return eqObj;
+                        return gtObj;
+                    };
+                };
+            };
+        };
+    };
+
+    public static final java.util.function.Function<Object, Object> ordNumberImpl = (ltObj) -> {
+        return (java.util.function.Function<Object, Object>) (eqObj) -> {
+            return (java.util.function.Function<Object, Object>) (gtObj) -> {
+                return (java.util.function.Function<Object, Object>) (xObj) -> {
+                    return (java.util.function.Function<Object, Object>) (yObj) -> {
+                        Double x = (Double) xObj;
+                        Double y = (Double) yObj;
+                        if (x < y) return ltObj;
+                        if (x.equals(y)) return eqObj;
+                        return gtObj;
+                    };
+                };
+            };
+        };
+    };
+
+    public static final java.util.function.Function<Object, Object> ordStringImpl = (ltObj) -> {
+        return (java.util.function.Function<Object, Object>) (eqObj) -> {
+            return (java.util.function.Function<Object, Object>) (gtObj) -> {
+                return (java.util.function.Function<Object, Object>) (xObj) -> {
+                    return (java.util.function.Function<Object, Object>) (yObj) -> {
+                        String x = (String) xObj;
+                        String y = (String) yObj;
+                        int cmp = x.compareTo(y);
+                        if (cmp < 0) return ltObj;
+                        if (cmp == 0) return eqObj;
+                        return gtObj;
+                    };
+                };
+            };
+        };
+    };
+
+    public static final java.util.function.Function<Object, Object> ordCharImpl = (ltObj) -> {
+        return (java.util.function.Function<Object, Object>) (eqObj) -> {
+            return (java.util.function.Function<Object, Object>) (gtObj) -> {
+                return (java.util.function.Function<Object, Object>) (xObj) -> {
+                    return (java.util.function.Function<Object, Object>) (yObj) -> {
+                        Character x = (Character) xObj;
+                        Character y = (Character) yObj;
+                        int cmp = x.compareTo(y);
+                        if (cmp < 0) return ltObj;
+                        if (cmp == 0) return eqObj;
+                        return gtObj;
+                    };
+                };
+            };
+        };
+    };
+
+    public static final java.util.function.Function<Object, Object> ordBooleanImpl = (ltObj) -> {
+        return (java.util.function.Function<Object, Object>) (eqObj) -> {
+            return (java.util.function.Function<Object, Object>) (gtObj) -> {
+                return (java.util.function.Function<Object, Object>) (xObj) -> {
+                    return (java.util.function.Function<Object, Object>) (yObj) -> {
+                        Boolean x = (Boolean) xObj;
+                        Boolean y = (Boolean) yObj;
+                        int cmp = x.compareTo(y);
+                        if (cmp < 0) return ltObj;
+                        if (cmp == 0) return eqObj;
+                        return gtObj;
+                    };
+                };
+            };
+        };
+    };
+
+    public static final java.util.function.Function<Object, Object> ordArrayImpl = (fObj) -> {
+        return (java.util.function.Function<Object, Object>) (xsObj) -> {
+            return (java.util.function.Function<Object, Object>) (ysObj) -> {
+                java.util.function.Function<Object, Object> f = (java.util.function.Function<Object, Object>) fObj;
+                Object[] xs = (Object[]) xsObj;
+                Object[] ys = (Object[]) ysObj;
+                int i = 0;
+                int xlen = xs.length;
+                int ylen = ys.length;
+                while (i < xlen && i < ylen) {
+                    Object x = xs[i];
+                    Object y = ys[i];
+                    java.util.function.Function<Object, Object> f_x = (java.util.function.Function<Object, Object>) f.apply(x);
+                    Integer o = (Integer) f_x.apply(y);
+                    if (o != 0) {
+                        return o;
+                    }
+                    i++;
+                }
+                if (xlen == ylen) {
+                    return 0;
+                } else if (xlen > ylen) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            };
+        };
+    };
+
 
 public static final Object ordVoid = (new java.util.function.Supplier<Object>() { public Object get() { java.util.Map<String, Object> __map = new java.util.LinkedHashMap<>(); __map.put("compare", (java.util.function.Function<Object, Object>) (v_0) -> (java.util.function.Function<Object, Object>) (v1_1) -> new Data_Ordering.EQ()); __map.put("Eq0", (java.util.function.Function<Object, Object>) (_dollar___unused_0) -> Data_Eq.eqVoid);  return __map; } }).get();
 public static final Object ordUnit = (new java.util.function.Supplier<Object>() { public Object get() { java.util.Map<String, Object> __map = new java.util.LinkedHashMap<>(); __map.put("compare", (java.util.function.Function<Object, Object>) (v_0) -> (java.util.function.Function<Object, Object>) (v1_1) -> new Data_Ordering.EQ()); __map.put("Eq0", (java.util.function.Function<Object, Object>) (_dollar___unused_0) -> Data_Eq.eqUnit);  return __map; } }).get();

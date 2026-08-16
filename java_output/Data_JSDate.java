@@ -50,7 +50,8 @@ public class Data_JSDate {
             return Double.NaN;
         }
 
-        java.util.Calendar cal = new java.util.GregorianCalendar(isLocal ? java.util.TimeZone.getDefault() : java.util.TimeZone.getTimeZone("UTC"));
+        java.util.GregorianCalendar cal = new java.util.GregorianCalendar(isLocal ? java.util.TimeZone.getDefault() : java.util.TimeZone.getTimeZone("UTC"));
+        cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
         cal.clear();
         cal.setLenient(true);
         cal.set(java.util.Calendar.YEAR, y.intValue());
@@ -65,7 +66,9 @@ public class Data_JSDate {
             cal.set(java.util.Calendar.YEAR, y.intValue());
         }
 
-        return (double) cal.getTimeInMillis();
+        double ts = (double) cal.getTimeInMillis();
+        System.out.println("createDate generated timestamp: " + ts);
+        return ts;
     }
 
     public static final java.util.function.Function<Object, Object> jsdate = (partsObj) -> {
@@ -86,7 +89,8 @@ public class Data_JSDate {
 
             if (method.equals("getTime")) return date;
             
-            java.util.Calendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+            java.util.GregorianCalendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+            cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
             cal.setTimeInMillis(date.longValue());
 
             if (method.equals("getUTCFullYear")) return (double) cal.get(java.util.Calendar.YEAR);
@@ -98,7 +102,8 @@ public class Data_JSDate {
             if (method.equals("getUTCSeconds")) return (double) cal.get(java.util.Calendar.SECOND);
             if (method.equals("getUTCMilliseconds")) return (double) cal.get(java.util.Calendar.MILLISECOND);
 
-            java.util.Calendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+            java.util.GregorianCalendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+            localCal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
             localCal.setTimeInMillis(date.longValue());
 
             if (method.equals("getFullYear")) return (double) localCal.get(java.util.Calendar.YEAR);
@@ -128,7 +133,8 @@ public class Data_JSDate {
                 
                 if (method.equals("getTime")) return date;
                 
-                java.util.Calendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+                java.util.GregorianCalendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+                cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
                 cal.setTimeInMillis(date.longValue());
 
                 if (method.equals("getUTCFullYear")) return (double) cal.get(java.util.Calendar.YEAR);
@@ -140,7 +146,8 @@ public class Data_JSDate {
                 if (method.equals("getUTCSeconds")) return (double) cal.get(java.util.Calendar.SECOND);
                 if (method.equals("getUTCMilliseconds")) return (double) cal.get(java.util.Calendar.MILLISECOND);
 
-                java.util.Calendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+                java.util.GregorianCalendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+                localCal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
                 localCal.setTimeInMillis(date.longValue());
 
                 if (method.equals("getFullYear")) return (double) localCal.get(java.util.Calendar.YEAR);
@@ -217,6 +224,6 @@ public static final Object getFullYear = (java.util.function.Function<Object, Ob
 public static final Object getDay = (java.util.function.Function<Object, Object>) (dt_0) -> ((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethodEff)).apply("getDay"))).apply(dt_0);
 public static final Object getDate = (java.util.function.Function<Object, Object>) (dt_0) -> ((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethodEff)).apply("getDate"))).apply(dt_0);
 public static final Object fromDateTime = (java.util.function.Function<Object, Object>) (v_0) -> ((java.util.function.Function<Object, Object>) (Data_JSDate.jsdate)).apply((new java.util.function.Supplier<Object>() { public Object get() { java.util.Map<String, Object> __map = new java.util.LinkedHashMap<>(); __map.put("year", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value0)); __map.put("month", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.January))) ? 0 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.February))) ? 1 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.March))) ? 2 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.April))) ? 3 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.May))) ? 4 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.June))) ? 5 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.July))) ? 6 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.August))) ? 7 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.September))) ? 8 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.October))) ? 9 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.November))) ? 10 : ( ((Boolean) ((((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value1 instanceof Data_Date_Component.December))) ? 11 : (new java.util.function.Supplier<Object>() { public Object get() { throw new RuntimeException("Failed pattern match"); } }).get())))))))))))))); __map.put("day", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(((Data_Date.Date) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value0)).value2)); __map.put("hour", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(((Data_Time.Time) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value1)).value0)); __map.put("minute", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(((Data_Time.Time) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value1)).value1)); __map.put("second", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(((Data_Time.Time) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value1)).value2)); __map.put("millisecond", ((java.util.function.Function<Object, Object>) (Data_Int.toNumber)).apply(((Data_Time.Time) (Object)(((Data_DateTime.DateTime) (Object)(v_0)).value1)).value3));  return __map; } }).get());
-public static final Object eqJSDate = (new java.util.function.Supplier<Object>() { public Object get() { java.util.Map<String, Object> __map = new java.util.LinkedHashMap<>(); __map.put("eq", (java.util.function.Function<Object, Object>) (a_0) -> (java.util.function.Function<Object, Object>) (b_1) -> (((Double) (((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethod)).apply("getTime"))).apply(a_0))) == ((Double) (((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethod)).apply("getTime"))).apply(b_1)))));  return __map; } }).get();
+public static final Object eqJSDate = (new java.util.function.Supplier<Object>() { public Object get() { java.util.Map<String, Object> __map = new java.util.LinkedHashMap<>(); __map.put("eq", (java.util.function.Function<Object, Object>) (a_0) -> (java.util.function.Function<Object, Object>) (b_1) -> java.util.Objects.equals(((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethod)).apply("getTime"))).apply(a_0), ((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethod)).apply("getTime"))).apply(b_1)));  return __map; } }).get();
 public static final Object ordJSDate = (new java.util.function.Supplier<Object>() { public Object get() { java.util.Map<String, Object> __map = new java.util.LinkedHashMap<>(); __map.put("compare", (java.util.function.Function<Object, Object>) (a_0) -> (java.util.function.Function<Object, Object>) (b_1) -> ((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_Ord.ordNumberImpl)).apply(new Data_Ordering.LT()))).apply(new Data_Ordering.EQ()))).apply(new Data_Ordering.GT()))).apply(((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethod)).apply("getTime"))).apply(a_0)))).apply(((java.util.function.Function<Object, Object>) (((java.util.function.Function<Object, Object>) (Data_JSDate.dateMethod)).apply("getTime"))).apply(b_1))); __map.put("Eq0", (java.util.function.Function<Object, Object>) (_dollar___unused_0) -> Data_JSDate.eqJSDate);  return __map; } }).get();
 }

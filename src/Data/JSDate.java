@@ -45,7 +45,8 @@
             return Double.NaN;
         }
 
-        java.util.Calendar cal = new java.util.GregorianCalendar(isLocal ? java.util.TimeZone.getDefault() : java.util.TimeZone.getTimeZone("UTC"));
+        java.util.GregorianCalendar cal = new java.util.GregorianCalendar(isLocal ? java.util.TimeZone.getDefault() : java.util.TimeZone.getTimeZone("UTC"));
+        cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
         cal.clear();
         cal.setLenient(true);
         cal.set(java.util.Calendar.YEAR, y.intValue());
@@ -83,7 +84,8 @@
 
             if (method.equals("getTime")) return date;
             
-            java.util.Calendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+            java.util.GregorianCalendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+            cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
             cal.setTimeInMillis(date.longValue());
 
             if (method.equals("getUTCFullYear")) return (double) cal.get(java.util.Calendar.YEAR);
@@ -95,7 +97,8 @@
             if (method.equals("getUTCSeconds")) return (double) cal.get(java.util.Calendar.SECOND);
             if (method.equals("getUTCMilliseconds")) return (double) cal.get(java.util.Calendar.MILLISECOND);
 
-            java.util.Calendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+            java.util.GregorianCalendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+            localCal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
             localCal.setTimeInMillis(date.longValue());
 
             if (method.equals("getFullYear")) return (double) localCal.get(java.util.Calendar.YEAR);
@@ -125,7 +128,8 @@
                 
                 if (method.equals("getTime")) return date;
                 
-                java.util.Calendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+                java.util.GregorianCalendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
+                cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
                 cal.setTimeInMillis(date.longValue());
 
                 if (method.equals("getUTCFullYear")) return (double) cal.get(java.util.Calendar.YEAR);
@@ -137,7 +141,8 @@
                 if (method.equals("getUTCSeconds")) return (double) cal.get(java.util.Calendar.SECOND);
                 if (method.equals("getUTCMilliseconds")) return (double) cal.get(java.util.Calendar.MILLISECOND);
 
-                java.util.Calendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+                java.util.GregorianCalendar localCal = new java.util.GregorianCalendar(java.util.TimeZone.getDefault());
+                localCal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
                 localCal.setTimeInMillis(date.longValue());
 
                 if (method.equals("getFullYear")) return (double) localCal.get(java.util.Calendar.YEAR);
