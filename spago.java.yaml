@@ -1,6 +1,9 @@
 package:
   name: js-date
   dependencies:
+    - assert
+    - console
+    - datetime
     - effect
     - exceptions
     - foreign

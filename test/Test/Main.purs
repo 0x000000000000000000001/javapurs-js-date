@@ -52,9 +52,13 @@ main = do
   assert <<< not <<< JSD.isValid =<< JSD.jsdateLocal defaultDateRecord { millisecond = nan }
 
   log "Check that a roundtrip conversion of a dates results in the input"
+  log "testing dateTime..."
   assert $ JSD.toDateTime (JSD.fromDateTime dateTime) == Just dateTime
+  log "testing ancientDateTime..."
   assert $ JSD.toDateTime (JSD.fromDateTime ancientDateTime) == Just ancientDateTime
+  log "testing bottom..."
   assert $ JSD.toDateTime (JSD.fromDateTime bottom) == Just bottom
+  log "testing top..."
   assert $ JSD.toDateTime (JSD.fromDateTime top) == Just top
 
   log "Check that equal dates test equal"
