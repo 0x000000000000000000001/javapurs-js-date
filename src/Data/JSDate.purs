@@ -75,7 +75,7 @@ instance showJSDate :: Show JSDate where
 
 -- | Attempts to read a `Foreign` value as a `JSDate`.
 readDate :: Foreign -> F JSDate
-readDate = unsafeReadTagged "Date"
+readDate = unsafeReadTagged "Number"
 
 -- | Checks whether a date value is valid. When a date is invalid, the majority
 -- | of the functions return `NaN`, `"Invalid Date"`, or throw an exception.
