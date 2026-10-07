@@ -1,5 +1,10 @@
 # JS Date
 
+## JVM tests
+
+`./bin/test` selects `js-date` in the [common isolated runner](../javapurs/docs/testing.md#port-particulier), preserving this checkout and its outputs.
+Use `./bin/test --help` for options and `./bin/test --clean` to rebuild the backend. The linked guide covers prerequisites, Java target/runtime settings and retained failure logs.
+
 [![CI](https://github.com/purescript-contrib/purescript-js-date/workflows/CI/badge.svg?branch=main)](https://github.com/purescript-contrib/purescript-js-date/actions?query=workflow%3ACI+branch%3Amain)
 [![Release](https://img.shields.io/github/release/purescript-contrib/purescript-js-date.svg)](https://github.com/purescript-contrib/purescript-js-date/releases)
 [![Pursuit](https://pursuit.purescript.org/packages/purescript-js-date/badge)](https://pursuit.purescript.org/packages/purescript-js-date)
@@ -19,7 +24,7 @@ spago install js-date
 
 ## Quick start
 
-The quick start hasn't been written yet (contributions are welcome!). The quick start covers a common, minimal use case for the library, whereas longer examples and tutorials are kept in the [docs directory](./docs).
+The quick start hasn't been written yet (contributions are welcome!). Usage examples are available in [the test suite](./test).
 
 ## Documentation
 
