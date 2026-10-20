@@ -31,6 +31,14 @@
         return Double.NaN;
     }
 
+    // Date.prototype.toISOString always includes milliseconds.
+    private static String __isoString(double date) {
+        String text = java.time.Instant.ofEpochMilli((long) date).toString();
+        int dot = text.indexOf('.');
+        int z = text.indexOf('Z');
+        return dot < 0 ? text.substring(0, z) + ".000Z" : text;
+    }
+
     private static Double createDate(boolean isLocal, java.util.Map<String, Object> parts) {
         System.out.println("createDate parts: " + parts);
         Double y = getNumber(parts.get("year"));
@@ -83,6 +91,7 @@
             if (date.isNaN()) return Double.NaN;
 
             if (method.equals("getTime")) return date;
+            if (method.equals("toISOString")) return __isoString(date);
             
             java.util.GregorianCalendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
             cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
@@ -127,6 +136,7 @@
                 if (date.isNaN()) return Double.NaN;
                 
                 if (method.equals("getTime")) return date;
+                if (method.equals("toISOString")) return __isoString(date);
                 
                 java.util.GregorianCalendar cal = new java.util.GregorianCalendar(java.util.TimeZone.getTimeZone("UTC"));
                 cal.setGregorianChange(new java.util.Date(Long.MIN_VALUE));
@@ -172,11 +182,13 @@
                     java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
                     java.util.Date d = sdf.parse(str.replace("GMT", ""));
                     return (double) d.getTime();
-                } else if (str.contains("T")) {
-                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                    sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
-                    java.util.Date d = sdf.parse(str);
-                    return (double) d.getTime();
+                }
+                // Accept both the ISO 'T' separator and the legacy ':' form
+                // used by the upstream test. Instant also accepts optional
+                // fractional seconds.
+                String normalized = str.trim().replaceFirst("^(\\d{4}-\\d{2}-\\d{2}):", "$1T");
+                if (normalized.endsWith("Z")) {
+                    return (double) java.time.Instant.parse(normalized).toEpochMilli();
                 }
                 return Double.NaN;
             } catch (Exception e) {
